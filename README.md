@@ -59,7 +59,7 @@ project-name/
 
 ## Contributors
 - Lawrence Lau - New BCIT CST student. Let's build this app!
-- **Teammate Name** - BCIT CST Student, Frontend enthusiast with a knack for creative design. Fun fact: Has a collection of over 50 houseplants.
+- Gurpreet Singh - I am exited to be here. Fun fact about me I love doing Sketching.
 - **Teammate Name** - BCIT CST Student, Frontend enthusiast with a knack for creative design. Fun fact: Has a collection of over 50 houseplants.
 
 ---
