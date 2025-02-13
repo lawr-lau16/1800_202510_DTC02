@@ -1,124 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<head>
-    <title>My BCIT Project</title>
-    <meta name="comp1800 template" content="My 1800 App">
+<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+<body class="h-full">
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<h1 class="text-[#27445D] text-7xl bg-[#A5BFCC] text-center font-black text-shadow ">ParkPal</h1>
 
-    <!-- Bootstrap Library CSS CDN go here -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Boostrap Library JS CDN  go here -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+<div>
 
-    <!-- Other libraries go here -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <!-- Link to styles of your own -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
 
-</head>
+    <div class="flex justify-end bg-[#497D74] text-white text-center ">
+        
+        <div class="p-2 m-2 bg-[#7AB2D3] hover:bg-gray-400 rounded-md"><a href="index.html">Home</a></div>
+        <div class="p-2 m-2  bg-[#7AB2D3] hover:bg-gray-400 rounded-md "><a href="signin.html">Sign In</a></div>
+        <div class="p-2 m-2  bg-[#7AB2D3] hover:bg-gray-400 rounded-md"><a href="profile.html">Profile</a></div>
+        <div class="p-2 m-2 bg-[#7AB2D3] hover:bg-gray-400 rounded-md"><a href="contactus.html">Contact Us</a></div>
+        
+</div>
+    
+<div class="bg-[#4A628A] h-full">
+    <br/>
 
-<body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
-    <header>
-        <nav class="container navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <nav class="hidden sm:block">
-                    <a href="#" class="justify-end bg_contain"></a>
-                    <img class="max-w-[50px]"
-                        src="https://cdn.create.vista.com/api/media/small/550581740/stock-vector-parking-sign-motor-pool-editable-vectors">
-                </nav>
-                <a class="navbar-brand text-start" href="#">ParkPal</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <div class="flex justify-center pt-5">
-            <h1>Welcome to ParkPal</h1>
-        </div>
-        <div>
-            <h4 class="flex justify-center">Let's find free parking</h4>
-        </div>
-        <div class="flex justify-center pb-10">
-            <button class="bg-cyan-400 p-2 rounded hover:bg-cyan-600 ">Login</button>
-        </div>
-
-        <div class="container">
-            <cards class="flex mx-auto max-md:flex-col max-md:items-center">
-                <div class="relative m-1 max-w-[400px] rounded-xl shadow-lg p-1 text-sm">
-                    <img class="rounded-lg"
-                        src="https://media.istockphoto.com/id/1124659884/photo/vancouver-city-under-the-mountain.jpg?s=612x612&w=0&k=20&c=sY7ySo8_-RH0hLHuHcF5Vo84LfckmOLVztNAvFKJB2Q=">
-                    <h3 class="font-bold">Vancouver</h3>
-                    <h4 class="relative">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolorum?
-                    </h4>
-                </div>
-                <div class="relative m-1 max-w-[400px] rounded-xl shadow-lg p-1 text-sm">
-                    <img class="rounded-lg"
-                        src="https://www.burnaby.ca/sites/default/files/styles/rad_widescreen_800w/public/acquiadam/2021-07/Brentwood%20Town%20Centre.jpg?h=d1cb525d&itok=rHl8UWNo">
-                    <h3 class="font-bold">Burnaby</h3>
-                    <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolorum?</h4>
-                </div>
-                <div class="relative m-1 max-w-[400px] rounded-xl shadow-lg p-1 text-sm">
-                    <img class="rounded-lg"
-                        src="https://you.ubc.ca/wp-content/uploads/2022/12/ubc-vancouver-land-acknowledgment.jpg">
-                    <h3 class="font-bold">UBC</h3>
-                    <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolorum?</h4>
-                </div>
-            </cards>
-        </div>
-
-        <footer>
-            <div class="container">
-                <footer class="py-3 my-4">
-                    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-                    </ul>
-                    <p class="text-center text-muted">© 2022 Company, Inc</p>
-                </footer>
-            </div>
-        </footer>
-    </main>
-
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-
-    <!-- Link to scripts of your own -->
-    <!-- <script src="./scripts/script.js"></script> -->
 
 </body>
 
