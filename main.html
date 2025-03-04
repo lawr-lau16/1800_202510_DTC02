@@ -26,7 +26,8 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
+     <script src="./scripts/firebase_dtc02.js"></script>
+     
     <!-------------------------------------------->
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
@@ -41,7 +42,7 @@
           .then(response => response.text())
           .then(data => document.getElementById(id).innerHTML = data);
       }
-      loadComponent("navbar", "text/nav_before_login.html");
+      loadComponent("navbar", "text/nav_after_login.html");
       loadComponent("footer", "text/footer.html");
     </script>
 </head>
@@ -49,20 +50,21 @@
 <html class="h-full">
   <body class="flex flex-col min-h-screen">
 
+    
     <!-- NAVBAR -->
     <div id="navbar"></div>
 
 
     <!-- BODY -->
-    <main class="flex-grow">
-      <div class="mt-2 mx-4">
-        <iframe class="w-full h-[calc(100vh-200px)]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83327.56084611577!2d-123.2064748339915!3d49.25770602905503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673f143a94fb3%3A0xbb9196ea9b81f38b!2sVancouver%2C%20BC!5e0!3m2!1sen!2sca!4v1741037279809!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </main>
+    <div class=" mt-2 mb-2 ratio ratio-16x9">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83327.56084611577!2d-123.2064748339915!3d49.25770602905503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673f143a94fb3%3A0xbb9196ea9b81f38b!2sVancouver%2C%20BC!5e0!3m2!1sen!2sca!4v1741037279809!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 
 
     <!-- FOOTER -->
-    <div id="footer"></div>
+  
+
+<div id="footer"></div>
 
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->
@@ -73,6 +75,8 @@
 
   <script src="./scripts/firebase_dtc02.js"></script>
   <script src="./scripts/skeleton.js"></script>
+  <script src="./scripts/main.js"></script>
   <!-- <script src="./scripts/script.js"></script> -->
-  </body>
+</body>
+
 </html>
