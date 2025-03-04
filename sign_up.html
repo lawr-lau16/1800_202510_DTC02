@@ -35,54 +35,98 @@
     <!-- <link rel="stylesheet" href="./styles/style.css"> -->
 </head>
 
-<body class="bg-[#aiaiai]">
-    <!-- NAVBAR -->
-    <header class=" pb-2 px-4">
-        <nav class="border-2 rounded-md border-black p-3 bg-[#333F50] flex gap-4 justify-between px-2">
+<html class="h-full">
+  <body class="flex flex-col min-h-screen">
+
+      <!-- NAVBAR -->
+      <header class="pt-4 pb-12 px-4">
+        <nav class="flex gap-4 justify-between px-2">
           <div class="flex items-center gap-1 tracking-widest leading-5 font-extrabold">
             <!-- INSERT LOGO HERE -->
-            <div class="h-[24px]  flex items-center  text-white text-6xl">ParkPal</div>
+            <div class="h-[24px] flex items-center text-3xl">ParkPal</div>
           </div>
           <div class=" ml-3 hidden lg:flex items-center gap-4 justify-start text-sm basis-[70%] font-medium">
-            <a href="#" class="hover:text-black hover:bg-cyan-400 border text-2xl  bg-gray-600 font-bold text-white rounded-full pt-3 pb-3 pl-5 pr-5">Home</a>
-            <a href="#" class="hover:text-gray-400 hover:bg-cyan-400  border text-2xl  bg-gray-600 font-bold text-white rounded-full pt-3 pb-3 pl-5 pr-5">Contact Us</a>
+            <a href="#" class="hover:text-gray-400">Home</a>
+            <a href="#" class="hover:text-gray-400">Contact Us</a>
           </div>
-          <div class="hidden lg:flex gap-4 basis-[25%] justify-between font-medium">
-            <div class=" rounded-3xl py-3 px-2 whitespace-nowrap">
-                <a href="#" class="hover:text-gray-400 hover:bg-cyan-400  border text-2xl pt-3 pb-3 pl-4 pr-4 font-bold rounded-full bg-gray-600 text-white">Sign Up Free</a>
+          <div class="hidden lg:flex gap-4 justify-between font-medium">
+            <div class="border-2 rounded-3xl py-2 px-4 whitespace-nowrap">
+                <a href="#" class="hover:text-gray-400">Sign Up Free</a>
             </div>
-            <div class="px-2 py-3 flex">
-                <div>
-                    <a href="#" class="hover:text-gray-400 hover:bg-cyan-400  border text-2xl font-bold pt-3 pb-3 pl-5 pr-5 rounded-full bg-gray-600 text-white ">Login</a>
-                </div>
+            <div class="py-[.5rem] px-2 flex gap-1">
+              <div>
+                  <a href="#" class="hover:text-gray-400">Login</a>
+              </div>
+              <div class="w-[30px]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M5 12l14 0" />
+                  <path d="M15 16l4 -4" />
+                  <path d="M15 8l4 4" />
+                </svg>
+              </div>
             </div>
           </div>
-        </nav>
-    </header>
+          <nav class="block lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 6l16 0" />
+              <path d="M4 12l16 0" />
+              <path d="M4 18l16 0" />
+            </svg>
+          </nav>
+      </header>
     
-    
+
     <!-- BODY -->
-    <form class="mx-auto max-w-[720px] mt-10 mb-10">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <main class="flex-grow">
+        <div class="mx-auto max-w-[720px] p-5 mt-2 shadow-2xl rounded-xl">
+            <div class="mb-6 text-center md:mb-12">
+                <p class="text-4xl font-bold tracking-wide">
+                    Create Account
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Re-Enter Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary mt-2 mb-2">Submit</button>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Re-Enter Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary mt-2 mb-2">Submit</button>
-    </form>
+    </main>
 
   
     <!-- FOOTER -->
-    <footer class=" border-2 rounded-md border-black text-2xl bg-[#252A34] text-white py-10">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
-            <p class="text-2xl">&copy; 2024 ParkPal. All rights reserved.</p>
+    <footer class="fixed-bottom mb-4 mx-4">
+        <div class="mx-auto flex flex-col md:flex-row justify-between items-center">
+            <p class="text-sm">&copy; 2024 ParkPal. All rights reserved.</p>
             <div class="flex space-x-4">
                 <a href="#" class="hover:text-gray-400">Facebook</a>
                 <a href="#" class="hover:text-gray-400">Twitter</a>
@@ -90,7 +134,6 @@
             </div>
         </div>
     </footer>
-
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
