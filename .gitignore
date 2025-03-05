@@ -2,4 +2,4 @@
 *.logs
 node_modules/
 .vscode/
-firebase_dtc02.js
+firebaseAPI_DTC02.js
