@@ -49,6 +49,7 @@
 </head>
 
 <html class="h-full">
+
 <body class="flex flex-col min-h-screen">
 
   <!-- NAVBAR -->
@@ -88,7 +89,7 @@
             </label>
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-password" type="password" placeholder="john.wick@my.bcit.ca">
+              id="grid-email" type="email" placeholder="john.wick@my.bcit.ca">
           </div>
         </div>
 
@@ -101,7 +102,7 @@
             <div class="relative">
               <select
                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state">
+                id="grid-vehicle_type">
                 <option>Sedan</option>
                 <option>SUV</option>
                 <option>Truck</option>
@@ -120,7 +121,7 @@
             </label>
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-last-name" type="text" placeholder="AA0 00A">
+              id="grid-license_plate" type="text" placeholder="AA0 00A">
           </div>
         </div>
 
@@ -141,7 +142,7 @@
             <div class="relative">
               <select
                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state">
+                id="grid-province">
                 <option>BC</option>
                 <option>AB</option>
                 <option>MB</option>
@@ -165,6 +166,14 @@
           </div>
         </div>
 
+        <div>
+          <button class="w-full bg-blue-500 text-white py-2 mt-4 rounded-md hover:bg-blue-600" type="button"
+            onclick="saveUserInfo()">
+            Submit
+          </button>
+        </div>
+
+
       </form>
     </div>
   </main>
@@ -173,6 +182,7 @@
   <!-- FOOTER -->
   <div id="footer"></div>
 
+  
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->
   <!---------------------------------------------->
@@ -187,8 +197,7 @@
     crossorigin="anonymous"></script>
 
   <script src="./scripts/firebaseAPI_DTC02.js"></script>
-  <script src="./scripts/skeleton.js"></script>
-  <!-- <script src="./scripts/script.js"></script> -->
+  <script src="./scripts/user_information.js"></script>
 </body>
 
 </html>
