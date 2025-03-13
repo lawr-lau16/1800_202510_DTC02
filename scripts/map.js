@@ -22,22 +22,15 @@ map.addControl(geocoder);
 
 let searchLocation = null;
 let searchLocationName = "";
-let searchLocationMarker = null;
 
-// Handle search result
-geocoder.on("result", (e) => {
-  searchLocation = e.result.geometry.coordinates;
-  searchLocationName = e.result.text;
-
-  console.log("Searched Location:", searchLocationName, searchLocation);
-
-  // Remove previous marker if exists
-  if (searchLocationMarker) searchLocationMarker.remove();
-
-  // Add new marker
-  searchLocationMarker = new mapboxgl.Marker({ color: "red" })
-    .setLngLat(searchLocation)
-    .addTo(map);
+let searchLocationMarker;
+geocoder.on("result", ({ result }) => {
+    searchLocation = result.geometry.coordinates;
+    searchLocationName = result.text;
+    searchLocationMarker?.remove();
+    searchLocationMarker = new mapboxgl.Marker({ color: "red" })
+        .setLngLat(searchLocation)
+        .addTo(map);
 
   map.flyTo({ center: searchLocation });
 
@@ -47,42 +40,6 @@ geocoder.on("result", (e) => {
   // Load reviews for this location
   loadReviews();
 });
-
-// Save to Favorites
-function saveToFavorites() {
-  if (!searchLocation) return alert("Search for a location first!");
-
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  let newFavorite = {
-    name: searchLocationName,
-    coordinates: searchLocation,
-  };
-
-  // Avoid duplicates
-  if (!favorites.some((fav) => fav.name === newFavorite.name)) {
-    favorites.push(newFavorite);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    loadFavorites();
-  }
-}
-
-// Load Favorites
-function loadFavorites() {
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  let list = document.getElementById("favoriteList");
-  list.innerHTML = "";
-  favorites.forEach((fav) => {
-    let li = document.createElement("li");
-    li.textContent = fav.name;
-    li.onclick = () => {
-      searchLocation = fav.coordinates;
-      searchLocationName = fav.name;
-      document.getElementById("locationName").textContent = searchLocationName;
-      map.flyTo({ center: searchLocation });
-    };
-    list.appendChild(li);
-  });
-}
 
 // Submit Review
 function submitReview() {
@@ -116,6 +73,3 @@ function loadReviews() {
     });
   }
 }
-
-// Load favorites on startup
-loadFavorites();
