@@ -1,82 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>ParkPal</title>
-    <!------------------------------------------>
-    <!-- Bootstrap Library CSS JS CDN go here -->
-    <!------------------------------------------>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-        </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
-    <!-------------------------------------------------------->
-    <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
-    <!-------------------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-    <!-------------------------------------------->
-    <!-- Other libraries and styles of your own -->
-    <!-------------------------------------------->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
-
-    <!-- JavaScript to load NAVBAR and FOOTER -->
-    <script>
-      function loadComponent(id, file) {
-          fetch(file)
-          .then(response => response.text())
-          .then(data => document.getElementById(id).innerHTML = data);
-      }
-      loadComponent("navbar", "text/nav_before_login.html");
-      loadComponent("footer", "text/footer.html");
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - ParkPal</title>
+  <!------------------------------------------>
+  <!-- Bootstrap Library CSS JS CDN go here -->
+  <!------------------------------------------>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-------------------------------------------------------->
+  <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
+  <!-------------------------------------------------------->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+  <!-------------------------------------------->
+  <!-- Other libraries and styles of your own -->
+  <!-------------------------------------------->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- JavaScript to load NAVBAR and FOOTER -->
+  <script>
+    function loadComponent(id, file) {
+      fetch(file)
+        .then(response => response.text())
+        .then(data => document.getElementById(id).innerHTML = data);
+    }
+    loadComponent("navbar", "text/nav_before_login.html");
+    loadComponent("footer", "text/footer.html");
+  </script>
 </head>
 
+<body class="flex flex-col min-h-screen bg-gray-100">
+  <!-- NAVBAR -->
+  <div id="navbar"></div>
 
-<html class="h-full">
-  <body class="flex flex-col min-h-screen">
+  <!-- ABOUT US CONTENT -->
+  <main class="flex-grow">
+    <div class="container mx-auto px-4 py-12">
+      <!-- Page Title -->
+      <h1 class="text-5xl font-bold text-center text-gray-800 mb-8">About Us</h1>
 
-
-    <!-- NAVBAR -->
-    <div id="navbar"></div>
-
-
-    <!-- BODY -->
-    <main class="flex-grow">
-      <div class="mt-2 mx-4">
-        <iframe class="w-full h-[calc(100vh-200px)]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83327.56084611577!2d-123.2064748339915!3d49.25770602905503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673f143a94fb3%3A0xbb9196ea9b81f38b!2sVancouver%2C%20BC!5e0!3m2!1sen!2sca!4v1741037279809!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <!-- Mission Section -->
+      <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-4">Our Mission</h2>
+        <p class="text-lg text-gray-600 mb-4">
+          At <strong>ParkPal</strong>, our mission is to revolutionize the way people find and manage parking spaces. We
+          aim to make parking hassle-free, efficient, and accessible for everyone, whether you're a daily commuter or a
+          visitor exploring the city.
+        </p>
+        <p class="text-lg text-gray-600">
+          By leveraging cutting-edge technology, we provide real-time parking availability, seamless reservations, and
+          personalized recommendations to save you time and reduce stress.
+        </p>
       </div>
-    </main>
 
-
-    <!-- FOOTER -->
-    <div id="footer"></div>
-
+<!-- Team Section -->
+<div class="bg-white p-8 rounded-lg shadow-lg mb-8">
+  <h2 class="text-3xl font-semibold text-gray-800 mb-6">Meet Our Team</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="text-center">
+     
+      <h3 class="text-xl font-semibold text-gray-800">Gurpreet</h3>
+      <p class="text-gray-600">BCIT student</p>
+      <p class="text-gray-500 text-sm">A student passionate about solving everyday problems with technology. Gurpreet
+        believes finding parking shouldn’t be a struggle — and built Park Pal to prove it.</p>
+    </div>
+    <div class="text-center">
     
+      <h3 class="text-xl font-semibold text-gray-800">Lawrence</h3>
+      <p class="text-gray-600">BCIT student</p>
+      <p class="text-gray-500 text-sm">A student passionate about solving everyday problems with technology. Lawrence
+        believes finding parking shouldn’t be a struggle — and built Park Pal to prove it.</p>
+    </div>
+    <div class="text-center">
+
+      <h3 class="text-xl font-semibold text-gray-800">Niga</h3>
+      <p class="text-gray-600">BCIT student</p>
+      <p class="text-gray-500 text-sm">A student passionate about solving everyday problems with technology. Niga
+        believes finding parking shouldn’t be a struggle — and built Park Pal to prove it.</p>
+    </div>
+  </div>
+</div>
+
+      <!-- Values Section -->
+      <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Our Values</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Value 1 -->
+          <div class="text-center">
+            <div class="bg-blue-100 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800">Innovation</h3>
+            <p class="text-gray-600">We constantly innovate to provide the best solutions for our users.</p>
+          </div>
+          <!-- Value 2 -->
+          <div class="text-center">
+            <div class="bg-green-100 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800">User-Centric</h3>
+            <p class="text-gray-600">Our users are at the heart of everything we do.</p>
+          </div>
+          <!-- Value 3 -->
+          <div class="text-center">
+            <div class="bg-purple-100 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-600" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800">Reliability</h3>
+            <p class="text-gray-600">We deliver reliable and trustworthy services.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->
   <!---------------------------------------------->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
   <script src="./scripts/firebaseAPI_DTC02.js"></script>
   <script src="./scripts/before_after_navbar.js"></script>
   <script src="./scripts/authentication.js"></script>
+</body>
 
-  </body>
 </html>
