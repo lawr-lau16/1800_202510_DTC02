@@ -101,14 +101,13 @@
 
     <!-- Script to Display User's Name -->
     <script>
-        // Fetch the logged-in user's name from Firebase
+        
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                // If the user is logged in, display their name
+                
                 const userNameElement = document.getElementById("userName");
-                userNameElement.textContent = user.displayName || "Niga"; // Default to "Niga" if no display name
-            } else {
-                // If no user is logged in, redirect to the login page
+                userNameElement.textContent = user.displayName || "Niga"; 
+               
                 window.location.href = "login.html";
             }
         });
