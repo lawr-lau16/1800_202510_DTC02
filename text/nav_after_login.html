@@ -1,43 +1,54 @@
 <!-- NAVBAR -->
-<header class=" shadow-lg pt-4 pb-12 px-4">
-  <nav class="flex gap-4 justify-between px-2">
-    <div class="flex items-center gap-1 tracking-widest leading-5 font-extrabold">
+<header class="bg-white bg-opacity-70 shadow-lg pt-4 pb-12 px-4">
+  <nav class="flex justify-between items-center px-2">
+    <div
+      class="flex items-center gap-3 tracking-widest leading-5 font-extrabold"
+    >
       <!-- INSERT LOGO HERE -->
-       <img src="/Logo/logo1.png" class="w-12 h-12">
+      <img src="/Logo/logo1.png" class="w-12 h-12" />
       <div class="h-[24px] flex items-center text-5xl">ParkPal</div>
     </div>
-    <div class=" ml-3 hidden lg:flex items-center gap-4 justify-start text-xl basis-[70%] font-medium">
-      <a href="../main.html" class="hover:text-gray-400">Home</a>
-      <a href="../contact_us.html" class="hover:text-gray-400">Contact Us</a>
-    </div>
-    <div class="hidden lg:flex gap-4 justify-between font-medium text-lg">
-      <div class="border-2 rounded-3xl py-2 px-4 whitespace-nowrap">
-        <a href="../user_information.html" class="hover:text-gray-400">Enter Information</a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden lg:flex items-center gap-4 text-xl font-medium">
+      <a href="../main.html" class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4">Home</a>
+      <a href="../contact_us.html" class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4">Contact Us</a>
+      <div class="border-2 rounded-3xl py-2 px-4">
+        <a href="../aboutus.html" class="hover:text-gray-400">Enter Information</a>
       </div>
-      <div class="py-[.5rem] px-2 flex gap-1">
-        <div>
-          <a href="../index.html" class="hover:text-gray-400 text-xl text-nowrap">Log Out</a>
-        </div>
-        <div class="w-[30px]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M5 12l14 0" />
-            <path d="M15 16l4 -4" />
-            <path d="M15 8l4 4" />
-          </svg>
-        </div>
-      </div>
+      <a href="../index.html" class="hover:text-gray-400 text-xl border-2 rounded-3xl py-2 px-4">Log Out</a>
     </div>
-    <nav class="block lg:hidden">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2">
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="block lg:hidden focus:outline-none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icon-tabler-menu-2"
+      >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M4 6l16 0" />
         <path d="M4 12l16 0" />
         <path d="M4 18l16 0" />
       </svg>
-    </nav>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div
+    id="mobile-menu"
+    class="flex-col hidden items-center gap-4 text-xl font-medium mt-4 lg:hidden"
+  >
+    <a href="../main.html" class="hover:text-gray-400">Home</a>
+    <a href="../contact_us.html" class="hover:text-gray-400">Contact Us</a>
+    <a href="../user_information.html" class="hover:text-gray-400">User Information</a>
+    <a href="../index.html" class="hover:text-gray-400 text-xl">Log Out</a>
+  </div>
 </header>
