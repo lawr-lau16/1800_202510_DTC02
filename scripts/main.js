@@ -1,29 +1,35 @@
-document.addEventListener("DOMContentLoaded", loadParkingSpots);
-
 function getNameFromAuth() {
   firebase.auth().onAuthStateChanged((user) => {
     // Check if a user is signed in:
     if (user) {
       // Do something for the currently logged-in user here:
-      console.log(user.uid); //print the uid in the browser console
-      console.log(user.displayName); //print the user name in the browser console
-      userName = user.displayName;
+      console.log(user.uid); // Print the uid in the browser console
+      console.log(user.displayName); // Print the user name in the browser console
+      const userName = user.displayName || user.email || "User"; // Fallback to email if displayName is not set
 
-      //method#1:insert with JS
-      document.getElementById("name-goes-here").innerText = userName;
+      // Update desktop placeholder
+      const userNameElement = document.getElementById("name-goes-here");
+      if (userNameElement) userNameElement.innerText = `Welcome, ${userName}!`;
 
-      //method #2:  insert using jquery
-      //$("#name-goes-here").text(userName); //using jquery
-
-      //method #3:  insert using querySelector
-      //document.querySelector("#name-goes-here").innerText = userName
+      // Update mobile placeholder
+      const userNameMobileElement = document.getElementById("name-goes-here-mobile");
+      if (userNameMobileElement) userNameMobileElement.innerText = `Welcome, ${userName}!`;
     } else {
       // No user is signed in.
       console.log("No user is logged in");
+
+      // Update desktop placeholder
+      const userNameElement = document.getElementById("name-goes-here");
+      if (userNameElement) userNameElement.innerText = "Welcome, Guest!";
+
+      // Update mobile placeholder
+      const userNameMobileElement = document.getElementById("name-goes-here-mobile");
+      if (userNameMobileElement) userNameMobileElement.innerText = "Welcome, Guest!";
     }
   });
 }
-getNameFromAuth(); //run the function
+
+getNameFromAuth(); // Run the function
 
 // Check if user is logged in. Saves the parkingSpotID under the user's favorite collection.
 function saveToFavorites(parkingSpotID) {
