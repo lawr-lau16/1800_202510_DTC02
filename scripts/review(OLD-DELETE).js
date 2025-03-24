@@ -16,9 +16,11 @@ document.getElementById("submitReview").addEventListener("click", () => {
     // Add review to Firestore
     db.collection("reviews")
         .add({
+            spotID: selectedSpotID, // <-- Link review to selected map pin
             text: reviewText,
-            rating: parseInt(selectedRating), // Convert to number
+            rating: parseInt(selectedRating),
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            userID: firebase.auth().currentUser.uid,
         })
         .then(() => {
             alert("Review submitted successfully!");

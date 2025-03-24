@@ -109,6 +109,7 @@ function loadFavorites() {
   });
 }
 
+
 // Call function on page load
 loadFavorites();
 
@@ -128,37 +129,4 @@ function updateStarColors() {
     let value = parseInt(star.getAttribute("data-value"));
     star.style.color = value <= selectedRating ? "#facc15" : "#9ca3af"; // Yellow if selected, gray otherwise
   });
-}
-
-// Submit Review
-function submitReview() {
-  let reviewText = document.getElementById("reviewInput").value;
-  if (!reviewText.trim()) {
-    alert("Please enter a review before submitting!");
-    return;
-  }
-  if (selectedRating === 0) {
-    alert("Please select a star rating!");
-    return;
-  }
-
-  // Create Review Entry
-  let reviewEntry = document.createElement("div");
-  reviewEntry.className = "p-3 bg-gray-200 rounded-lg shadow";
-
-  let starsDisplay =
-    "⭐".repeat(selectedRating) + "☆".repeat(5 - selectedRating); // Show stars
-
-  reviewEntry.innerHTML = `
-            <p class="font-semibold text-lg">${starsDisplay}</p>
-            <p>${reviewText}</p>
-        `;
-
-  // Add review to list
-  document.getElementById("reviewList").prepend(reviewEntry);
-
-  // Reset fields
-  document.getElementById("reviewInput").value = "";
-  selectedRating = 0;
-  updateStarColors();
 }
