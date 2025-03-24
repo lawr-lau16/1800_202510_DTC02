@@ -27,6 +27,7 @@
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
+
   <!-------------------------------------------->
   <!-- Other libraries and styles of your own -->
   <!-------------------------------------------->
@@ -34,14 +35,35 @@
 
   <!-- JavaScript to load NAVBAR and FOOTER -->
   <script>
-    function loadComponent(id, file) {
-      fetch(file)
-        .then(response => response.text())
-        .then(data => document.getElementById(id).innerHTML = data);
+    function loadNavbarAndFooter() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is logged in
+          fetch("text/nav_after_login.html")
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("navbar").innerHTML = data;
+              getNameFromAuth(); // Update welcome message
+            });
+        } else {
+          // User is not logged in
+          fetch("text/nav_before_login.html")
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("navbar").innerHTML = data;
+            });
+        }
+
+        // Load footer (same for both)
+        fetch("text/footer.html")
+          .then((response) => response.text())
+          .then((data) => (document.getElementById("footer").innerHTML = data));
+      });
     }
-    loadComponent("navbar", "text/nav_before_login.html");
-    loadComponent("footer", "text/footer.html");
+
+    window.addEventListener("DOMContentLoaded", loadNavbarAndFooter);
   </script>
+
 </head>
 
 <body class="flex flex-col min-h-screen bg-gray-100">
@@ -167,10 +189,12 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
+  <!-- External JS Files -->
   <script src="./scripts/firebaseAPI_DTC02.js"></script>
-  <script src="./scripts/before_after_navbar.js"></script>
-  <script src="./scripts/authentication.js"></script>
-  <script src="./scripts/nav_before_login.js"></script>
+  <script src="./scripts/map_pins.js"></script>
+  <script src="./scripts/main.js"></script>
+  <script src="./scripts/map.js"></script>
+  <script src="./scripts/nav_after_login.js"></script>
 </body>
 
 </html>
