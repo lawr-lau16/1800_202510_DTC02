@@ -2,12 +2,12 @@
 mapboxgl.accessToken =
   "pk.eyJ1IjoiZ3VycHJlZXRzaW5naDk0MTQiLCJhIjoiY204NjlnNmdsMDF4cjJpcHFrdWczYXRyYSJ9.aQSt4ydGc7sjLgC4VodRdg"; // Replace with your actual token
 
-const map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/mapbox/streets-v11",
-  center: [-122.964274, 49.236082],
-  zoom: 10,
-});
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: [-123.1207, 49.2827], // Coordinates for downtown Vancouver
+    zoom: 13, // Closer zoom level
+  });
 
 map.addControl(new mapboxgl.NavigationControl(), "top-left");
 
