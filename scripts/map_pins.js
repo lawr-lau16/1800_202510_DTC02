@@ -40,7 +40,12 @@ function loadParkingSpots() {
 
                 let locationNameElement = document.getElementById("locationName");
                 if (locationNameElement) {
-                    locationNameElement.innerText = selectedSpotName; // Use dataset name
+                    locationNameElement.textContent = selectedSpotName;
+                    const encodedName = encodeURIComponent(selectedSpotName);
+                    // This hyperlink will use the title as an address for google maps
+                    locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodedName}`;
+                    // This hyperlink will use the longitude and latitude for google maps
+                    // locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${spot.latitude},${spot.longitude}`;
                 } else {
                     console.error("❌ 'locationName' element not found. Make sure it exists in main.html!");
                 }
