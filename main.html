@@ -52,7 +52,6 @@
     window.addEventListener("DOMContentLoaded", loadNavbarAndFooter);
   </script>
 
-
   <style>
     /* Ensure body takes full height */
     body,
@@ -90,6 +89,18 @@
                            transition duration-300">
           Save to Favorites
         </button>
+
+        <!-- Input form to save location either publically or privately -->
+        <h3 class="text-xl font-semibold text-gray-700 mt-5 mb-5">Save New Parking Spot</h3>
+        <input id="spotName" placeholder="Parking Spot Name" class="border p-2 mb-2 w-full" />
+        <select id="visibility" class="border p-2 mb-2 w-full">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+        <button onclick="createSpot()" class="bg-blue-600 text-white px-4 py-2 rounded">Save Location</button>
+
+
+
         <!-- Reviews Section -->
         <div class="mt-6">
           <h3 class="text-xl font-semibold text-gray-700">Reviews</h3>

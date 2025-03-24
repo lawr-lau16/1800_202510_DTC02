@@ -4,20 +4,37 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Function to save a parking spot to Firestore
-function saveParkingSpot(name, latitude, longitude) {
-    db.collection("parking_spots").add({
-        name: name,
-        latitude: latitude,
-        longitude: longitude,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    })
-    .then(() => {
-        console.log("Parking spot added successfully!");
-    })
-    .catch(error => {
-        console.error("Error adding parking spot: ", error);
+function saveParkingSpot(name, latitude, longitude, visibility) {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            db.collection("parking_spots").add({
+                name: name,
+                latitude: latitude,
+                longitude: longitude,
+                visibility: visibility, // "public" or "private"
+                ownerID: user.uid,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+                .then(() => {
+                    console.log("🚀 Parking spot added!");
+                })
+                .catch(error => {
+                    console.error("❌ Error saving parking spot:", error);
+                });
+        }
     });
 }
+// Function to trigger saveParkingSpot
+function createSpot() {
+    const name = document.getElementById("spotName").value;
+    const visibility = document.getElementById("visibility").value;
+
+    if (!searchLocation) return alert("Please search a location first!");
+    if (!name.trim()) return alert("Please enter a spot name!");
+
+    saveParkingSpot(name, searchLocation[1], searchLocation[0], visibility); // lat, lng
+}
+
 
 // Function to load parking spots from Firestore and display them on the map
 function loadParkingSpots() {
