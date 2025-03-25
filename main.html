@@ -2,115 +2,146 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map with Reviews & Favorites</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map with Reviews & Favorites</title>
 
-    <!-- Mapbox Styles -->
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.css" rel="stylesheet" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.1.0/mapbox-gl-geocoder.css"
-        rel="stylesheet" />
+  <!-- Mapbox Styles -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.1.0/mapbox-gl-geocoder.css"
+    rel="stylesheet" />
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
-        function loadComponent(id, file) {
-            fetch(file)
-                .then(response => response.text())
-                .then(data => document.getElementById(id).innerHTML = data);
+  <script>
+    function loadNavbarAndFooter() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is logged in
+          fetch("text/nav_after_login.html")
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("navbar").innerHTML = data;
+              getNameFromAuth(); // Update welcome message
+            });
+        } else {
+          // User is not logged in
+          fetch("text/nav_before_login.html")
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("navbar").innerHTML = data;
+            });
         }
-        loadComponent("navbar", "text/nav_after_login.html");
-        loadComponent("footer", "text/footer.html");
-    </script>
 
-    <style>
-        /* Ensure body takes full height */
-        body, html {
-            height: 100%;
-            margin: 0;
-        }
-    </style>
+        // Load footer (same for both)
+        fetch("text/footer.html")
+          .then((response) => response.text())
+          .then((data) => (document.getElementById("footer").innerHTML = data));
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", loadNavbarAndFooter);
+  </script>
+
+  <style>
+    /* Ensure body takes full height */
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100">
-    <div id="navbar"></div>
+  <div id="navbar"></div>
 
-    <!-- Responsive Layout -->
-    <section class="flex flex-col sm:flex-col-reverse md:flex-row h-screen">
-        <!-- Map Container -->
-        <div id="map" class="w-full md:w-3/4 h-full"></div>
+  <!-- Responsive Layout -->
+  <section class="flex flex-col lg:flex-row min-h-screen">
 
-        <!-- Sidebar (Info Panel) -->
-        <div id="infoPanel" class="bg-white bg-opacity-70 backdrop-blur-md shadow-xl p-4 transition-all 
-            w-full md:w-1/4 md:h-screen  sm:bottom-0 sm:left-0 sm:right-0 sm:relative">
+    <!-- Map Container -->
+    <div id="map" class="w-full h-[60vh] lg:h-screen lg:w-3/4"></div>
 
-            <!-- Location Name -->
-            <h2 id="locationName" class="text-center text-3xl font-extrabold text-gray-800">Pick a Location</h2>
+    <!-- Sidebar (Info Panel) -->
+    <div id="infoPanel" class="w-full bg-white bg-opacity-70 backdrop-blur-md shadow-xl p-4 lg:w-1/4 lg:h-screen">
 
-            <!-- Favorites Section -->
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold text-gray-700">Favorites</h3>
-                <ul id="favoriteList" class="mt-2 space-y-2 text-gray-900"></ul>
+      <!-- Location Name -->
+      <a id="locationName" class="text-center block text-3xl font-extrabold text-gray-800 hover:underline"
+        target="_blank">
+        Pick a Location
+      </a>
 
-                <button onclick="addFavorite()"
-                    class="w-full mt-3 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 
+      <!-- Favorites Section -->
+      <div class="mt-6">
+        <h3 class="text-xl font-semibold text-gray-700">Favorites</h3>
+        <ul id="favoriteList" class="mt-2 space-y-2 text-gray-900"></ul>
+
+        <button onclick="addFavorite()" class="w-full mt-3 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 
                            transition duration-300">
-                    Save to Favorites
-                </button>
-            <!-- Reviews Section -->
-           <div class="mt-6">
-    <h3 class="text-xl font-semibold text-gray-700">Reviews</h3>
+          Save to Favorites
+        </button>
 
-    <!-- Star Rating -->
-    <div id="starRating" class="flex space-x-2 mt-2">
-        <span class="star cursor-pointer text-gray-400 text-3xl" data-value="1">★</span>
-        <span class="star cursor-pointer text-gray-400 text-3xl" data-value="2">★</span>
-        <span class="star cursor-pointer text-gray-400 text-3xl" data-value="3">★</span>
-        <span class="star cursor-pointer text-gray-400 text-3xl" data-value="4">★</span>
-        <span class="star cursor-pointer text-gray-400 text-3xl" data-value="5">★</span>
-    </div>
+        <!-- Input form to save location either publically or privately -->
+        <h3 class="text-xl font-semibold text-gray-700 mt-5 mb-5">Save New Parking Spot</h3>
+        <input id="spotName" placeholder="Parking Spot Name" class="border p-2 mb-2 w-full" />
+        <select id="visibility" class="border p-2 mb-2 w-full">
+          <option value="public">Share Publicly</option>
+          <option value="private">Save Privately</option>
+        </select>
+        <button onclick="createSpot()" class="bg-blue-600 text-white px-4 py-2 rounded">Create New Parking Spot</button>
 
-    <textarea id="reviewInput" placeholder="Leave a review" 
-        class="w-full h-24 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 mt-2">
+
+
+        <!-- Reviews Section -->
+        <div class="mt-6">
+          <h3 class="text-xl font-semibold text-gray-700">Reviews</h3>
+
+          <!-- Star Rating -->
+          <div id="starRating" class="flex space-x-2 mt-2">
+            <span class="star cursor-pointer text-gray-400 text-3xl" data-value="1">★</span>
+            <span class="star cursor-pointer text-gray-400 text-3xl" data-value="2">★</span>
+            <span class="star cursor-pointer text-gray-400 text-3xl" data-value="3">★</span>
+            <span class="star cursor-pointer text-gray-400 text-3xl" data-value="4">★</span>
+            <span class="star cursor-pointer text-gray-400 text-3xl" data-value="5">★</span>
+          </div>
+
+          <textarea id="reviewInput" placeholder="Leave a review"
+            class="w-full h-24 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 mt-2">
     </textarea>
 
-    <button onclick="submitReview()"
-        class="w-full mt-3 py-2 rounded-lg bg-green-600 text-white font-semibold shadow-lg hover:bg-green-700 
+          <button onclick="submitReview()" class="w-full mt-3 py-2 rounded-lg bg-green-600 text-white font-semibold shadow-lg hover:bg-green-700 
                transition duration-300">
-        Submit Review
-    </button>
+            Submit Review
+          </button>
 
-    <div id="reviewList" class="mt-4 space-y-3 text-gray-800"></div>
-</div>
+          <div id="reviewList" class="mt-4 space-y-3 text-gray-800"></div>
+        </div>
 
-    </section>
+  </section>
 
-    <div id="footer"></div>
+  <div id="footer"></div>
 
-    <!-- External JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+  <!-- External JavaScript -->
+  <!-- MapBox -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.1.0/mapbox-gl-geocoder.min.js"></script>
 
-    <!-- MapBox -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.1.0/mapbox-gl-geocoder.min.js"></script>
-
-    <!-- External JS Files -->
-    <script src="./scripts/firebaseAPI_DTC02.js"></script>
-    <script src="./scripts/map_pins.js"></script>
-    <script src="./scripts/main.js"></script>
-    <script src="./scripts/map.js"></script>
-    <script src="./scripts/nav_after_login.js"></script>
+  <!-- External JS Files -->
+  <script src="./scripts/firebaseAPI_DTC02.js"></script>
+  <script src="./scripts/map_pins.js"></script>
+  <script src="./scripts/map.js"></script>
+  <script src="./scripts/main.js"></script>
+  <script src="./scripts/nav_after_login.js"></script>
 
 </body>
 
