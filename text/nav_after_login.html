@@ -1,29 +1,56 @@
 <!-- NAVBAR -->
 <header class="bg-white bg-opacity-70 shadow-lg pt-4 pb-12 px-4">
   <nav class="flex justify-between items-center px-2">
-    <div class="flex items-center gap-3 tracking-widest leading-5 font-extrabold">
+    <div
+      class="flex items-center gap-3 tracking-widest leading-5 font-extrabold"
+    >
       <!-- INSERT LOGO HERE -->
-      <img src="/Logo/logo1.png" class="w-12 h-12" />
-      <div class="h-[24px] flex items-center text-5xl">ParkPal</div>
-      <!-- User Name Display -->
-      <div id="name-goes-here" class="text-gray-800 ml-4">
-        Welcome, Guest!
+      <a href="main.html"><img src="/Logo/logo1.png" class="w-12 h-12" /></a>
+      <div class="h-[24px] flex items-center text-5xl">
+        <a href="main.html">ParkPal</a>
       </div>
+      <!-- User Name Display -->
+      <div id="name-goes-here" class="text-gray-800 ml-4">Welcome, Guest!</div>
     </div>
 
     <!-- Desktop Navigation -->
     <div class="hidden lg:flex items-center gap-4 text-xl font-medium">
-      <a href="../main.html" class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4">Home</a>
-      <a href="../contact_us.html" class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4">Contact Us</a>
-      <a href="../aboutus.html" class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4">About Us</a>
-      <a href="../index.html" class="hover:text-gray-400 text-xl border-2 rounded-3xl py-2 px-4">Log Out</a>
+      <a
+        href="../main.html"
+        class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4"
+        >Home</a
+      >
+      <a
+        href="../contact_us.html"
+        class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4"
+        >Contact Us</a
+      >
+      <a
+        href="../aboutus.html"
+        class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4"
+        >About Us</a
+      >
+      <a
+        href="../index.html"
+        class="hover:text-gray-400 text-xl border-2 rounded-3xl py-2 px-4" onclick="logout()"
+        >Log Out</a
+      >
     </div>
 
     <!-- Mobile Menu Button -->
     <button id="menu-btn" class="block lg:hidden focus:outline-none">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="icon icon-tabler icon-tabler-menu-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icon-tabler-menu-2"
+      >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M4 6l16 0" />
         <path d="M4 12l16 0" />
@@ -33,14 +60,15 @@
   </nav>
 
   <!-- Mobile Navigation -->
-  <div id="mobile-menu" class="flex-col hidden items-center gap-4 text-xl font-medium mt-4 lg:hidden">
+  <div
+    id="mobile-menu"
+    class="flex-col hidden items-center gap-4 text-xl font-medium mt-4 lg:hidden"
+  >
     <a href="../index.html" class="hover:text-gray-400">Home</a>
     <a href="../contact_us.html" class="hover:text-gray-400">Contact Us</a>
     <a href="../aboutus.html" class="hover:text-gray-400">About Us</a>
     <!-- User Name Display for Mobile -->
-    <div id="name-goes-here-mobile" class="text-gray-800">
-      Welcome, Guest!
-    </div>
+    <div id="name-goes-here-mobile" class="text-gray-800">Welcome, Guest!</div>
     <a href="../index.html" class="hover:text-gray-400 text-xl">Log Out</a>
   </div>
 </header>
