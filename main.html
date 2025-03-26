@@ -72,52 +72,40 @@
     <!-- Map Container -->
     <div id="map" class="w-full h-[60vh] lg:h-screen lg:w-3/4"></div>
 
-      <div
-        id="infoPanel"
-        class="w-full bg-white bg-opacity-90 backdrop-blur-md shadow-xl p-4 lg:w-1/4 lg:h-screen overflow-y-auto space-y-6"
-      >
-        <!-- Location Section - Card 1 -->
-        <div
-          class="bg-gray-500 text-white rounded-lg shadow-md p-4 border border-gray-200"
-        >
-          <h3 class="text-xl font-semibold text-white mb-3">
-            Save New Parking Spot
-          </h3>
-          <input
-            id="spotName"
-            placeholder="Parking Spot Address"
-            class="border p-2 mb-2 w-full text-black rounded focus:ring-2 focus:ring-blue-300"
-          />
-          <select
-            id="visibility"
-            class="border p-2 mb-2 w-full text-black rounded focus:ring-2 focus:ring-blue-300"
-          >
-            <option value="public">Share Publicly</option>
-            <option value="private">Save Privately</option>
-          </select>
-          <button
-            onclick="createSpot()"
-            class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300"
-          >
-            Create New Parking Spot
-          </button>
-        </div>
-        <div class="bg-gray-50 rounded-lg shadow-md p-4 border border-gray-200">
-          <h2 class="text-xl font-bold text-gray-800 mb-3">
-            Selected Location
-          </h2>
-          <a
-            id="locationName"
-            class="text-center block text-2xl font-semibold text-blue-600 hover:underline"
-            target="_blank"
-          >
-            Pick a Location
-          </a>
-        </div>
+    <!-- Sidebar (Info Panel) -->
+    <!-- Updated Info Panel with Card-like Sections -->
+    <!-- Updated Info Panel with Separate Parking Spot and Reviews Cards -->
+    <div id="infoPanel"
+      class="w-full bg-white bg-opacity-90 backdrop-blur-md shadow-xl p-4 lg:w-1/4 lg:h-screen overflow-y-auto space-y-6">
+      <!-- Location Section - Card 1 -->
+      <div class="bg-gray-500 text-white rounded-lg shadow-md p-4 border border-gray-200">
+        <h3 class="text-xl font-semibold text-white mb-3">
+          Create New Parking Spot
+        </h3>
+        <input id="spotName" placeholder="Parking Spot Address"
+          class="border p-2 mb-2 w-full text-black rounded focus:ring-2 focus:ring-blue-300" />
+        <select id="visibility" class="border p-2 mb-2 w-full text-black rounded focus:ring-2 focus:ring-blue-300">
+          <option value="public">Share Publicly</option>
+          <option value="private">Save Privately</option>
+        </select>
+        <button onclick="createSpot()"
+          class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+          Create New Parking Spot
+        </button>
+      </div>
+      <div class="bg-gray-50 rounded-lg shadow-md p-4 border border-gray-200">
+        <h2 class="text-xl font-bold text-gray-800 mb-3">
+          Selected Location
+        </h2>
+        <a id="locationName" class="text-center block text-2xl font-semibold text-blue-600 hover:underline"
+          target="_blank">
+          Start By Selecting Location
+        </a>
+      </div>
 
       <!-- Favorites Section - Card 2 -->
       <div class="bg-gray-50 rounded-lg shadow-md p-4 border border-gray-200">
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">Favorited Parking Spots</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">Favorited Parking Spots:</h3>
         <ul id="favoriteList" class="space-y-2 text-gray-900 mb-4"></ul>
 
         <button onclick="addFavorite()"
