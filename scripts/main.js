@@ -9,11 +9,11 @@ function getNameFromAuth() {
 
       // Update desktop placeholder
       const userNameElement = document.getElementById("name-goes-here");
-      if (userNameElement) userNameElement.innerText = `Welcome, ${userName}!`;
+      if (userNameElement) userNameElement.innerText = `${userName}!`;
 
       // Update mobile placeholder
       const userNameMobileElement = document.getElementById("name-goes-here-mobile");
-      if (userNameMobileElement) userNameMobileElement.innerText = `Welcome, ${userName}!`;
+      if (userNameMobileElement) userNameMobileElement.innerText = `${userName}!`;
     } else {
       // No user is signed in.
       console.log("No user is logged in");
