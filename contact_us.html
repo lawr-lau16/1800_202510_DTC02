@@ -55,7 +55,6 @@
               document.getElementById("navbar").innerHTML = data;
             });
         }
-
         // Load footer (same for both)
         fetch("text/footer.html")
           .then((response) => response.text())
@@ -71,6 +70,7 @@
 <html class="h-full">
 
 <body class="flex flex-col min-h-screen">
+
   <!-- NAVBAR -->
   <div id="navbar"></div>
 

@@ -1,12 +1,13 @@
+
 function logout() {
   firebase
     .auth()
     .signOut()
     .then(() => {
-      // Sign-out successful.
-      console.log("logging out user");
+      console.log("User logged out.");
+      window.location.href = "../index.html"; // Redirect to homepage
     })
     .catch((error) => {
-      // An error happened.
+      console.error("Logout error:", error);
     });
 }
