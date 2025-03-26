@@ -20,7 +20,7 @@ function loadParkingSpots() {
         setTimeout(() => {
           const locationNameElement = document.getElementById("locationName");
           if (locationNameElement) {
-            locationNameElement.textContent = selectedSpotName + " 📍";
+            locationNameElement.textContent = selectedSpotName + "";
             const encodedName = encodeURIComponent(selectedSpotName);
             locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodedName}`;
           }
