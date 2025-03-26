@@ -99,7 +99,7 @@ function loadFavorites() {
                   let spotData = spotDoc.data();
                   let listItem = document.createElement("li");
                   // Edit here to change how favorites show up
-                  listItem.innerText = `Favorite: ${spotData.name}`;
+                  listItem.innerText = `${spotData.name}`;
                   favoriteList.appendChild(listItem);
                 }
               });
