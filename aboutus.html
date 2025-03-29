@@ -40,38 +40,39 @@
   <!-- JavaScript to load NAVBAR and FOOTER -->
   <script>
     function loadNavbarAndFooter() {
-     firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          // User is logged in
-          fetch("text/nav_after_login.html")
-            .then((response) => response.text())
-            .then((data) => {
-              document.getElementById("navbar").innerHTML = data;
-              getNameFromAuth(); // Update welcome message
-            });
-          // Load footer with Logout button
-          fetch("text/footer_after_login.html")
-            .then((response) => response.text())
-            .then((data) => {
-              document.getElementById("footer").innerHTML = data;
-            });
-        } else {
-          // User is not logged in
-          fetch("text/nav_before_login.html")
-            .then((response) => response.text())
-            .then((data) => {
-              document.getElementById("navbar").innerHTML = data;
-            });
-        }
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // User is logged in
+      fetch("text/nav_after_login.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar").innerHTML = data;
+          getNameFromAuth(); // Optional: update welcome message
+        });
 
-        // Load footer with login button
-        fetch("text/footer_before_login.html")
-          .then((response) => response.text())
-          .then(
-            (data) => (document.getElementById("footer").innerHTML = data)
-          );
-      });
+      fetch("text/footer_after_login.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+
+    } else {
+      // User is not logged in
+      fetch("text/nav_before_login.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar").innerHTML = data;
+        });
+
+      fetch("text/footer_before_login.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
     }
+  });
+}
+
 
     window.addEventListener("DOMContentLoaded", loadNavbarAndFooter);
   </script>
@@ -207,6 +208,7 @@
   <script src="./scripts/main.js"></script>
   <script src="./scripts/map.js"></script>
   <script src="./scripts/nav_after_login.js"></script>
+  <script src="scripts/script.js"></script>
 </body>
 
 </html>

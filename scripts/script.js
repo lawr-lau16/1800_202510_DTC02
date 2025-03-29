@@ -1,4 +1,3 @@
-
 function logout() {
   firebase
     .auth()
@@ -11,3 +10,19 @@ function logout() {
       console.error("Logout error:", error);
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+});
+
+firebase.auth().onAuthStateChanged((user) => {
+  const logo = document.getElementById("logo");
+  if (user && logo) {
+    logo.classList.add("hidden");
+  }
+});
