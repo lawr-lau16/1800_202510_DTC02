@@ -5,9 +5,18 @@
       class="flex items-center gap-3 tracking-widest leading-5 font-extrabold"
     >
       <!-- INSERT LOGO HERE -->
-      <a href="main.html"><img src="/Logo/logo1.png" class="w-12 h-12 hidden sm:block" /></a>
+      <a href="main.html"
+        ><img src="/Logo/logo1.png" class="w-12 h-12 no-underline hidden sm:block"
+      /></a>
       <div class="h-[24px] flex items-center text-5xl">
-        <a href="main.html">ParkPal</a>
+        <a 
+  href="main.html" 
+  class="no-underline text-black hover:text-black visited:text-black focus:outline-none"
+>
+  ParkPal
+</a>
+
+
       </div>
       <!-- User Name Display -->
       <div id="name-goes-here" class="text-gray-800 ml-4">Welcome, Guest!</div>
@@ -25,13 +34,16 @@
         class="hover:text-gray-400 border-2 rounded-3xl py-2 px-4"
         >Contact Us</a
       >
+      <div class="border-2 rounded-3xl py-2 px-4">
+        <a href="../aboutus.html" class="hover:text-gray-400">About Us</a>
+      </div>
 
       <a
-        href="../index.html"
-        class="hover:text-gray-400 text-xl border-2 rounded-3xl py-2 px-4"
         onclick="logout()"
-        >Log Out</a
+        class="cursor-pointer hover:text-gray-400 text-xl border-2 rounded-3xl py-2 px-4"
       >
+        Log Out
+      </a>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -63,13 +75,14 @@
   >
     <a href="../index.html" class="hover:text-gray-400">Home</a>
     <a href="../contact_us.html" class="hover:text-gray-400">Contact Us</a>
+    <a href="../aboutus.html" class="hover:text-gray-400">About Us</a>
 
     <!-- User Name Display for Mobile -->
     <a
-      href="../index.html"
-      class="hover:text-gray-400 text-xl"
       onclick="logout()"
-      >Log Out</a
+      class="cursor-pointer hover:text-gray-400 text-xl border-2 rounded-3xl py-2 px-4"
     >
+      Log Out
+    </a>
   </div>
 </header>
