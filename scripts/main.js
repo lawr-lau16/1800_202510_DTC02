@@ -79,49 +79,49 @@ function loadFavorites() {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       let userID = user.uid;
+      let favoriteList = document.getElementById("favoriteList");
+      let renderedFavorites = new Set();
+
       db.collection("users")
         .doc(userID)
         .collection("favorites")
         .onSnapshot((snapshot) => {
-          let favoriteList = document.getElementById("favoriteList");
-          favoriteList.innerHTML = ""; // Clear list
+          favoriteList.innerHTML = ""; // Clear current list
+          renderedFavorites.clear();   // Clear previous render tracking
 
           snapshot.forEach((doc) => {
             let favSpot = doc.data();
+            let spotID = favSpot.parkingSpotID;
 
-            // Fetch the parking spot details using its ID
             db.collection("parking_spots")
-              .doc(favSpot.parkingSpotID)
+              .doc(spotID)
               .get()
               .then((spotDoc) => {
-                if (spotDoc.exists) {
+                if (spotDoc.exists && !renderedFavorites.has(spotID)) {
+                  renderedFavorites.add(spotID); // ✅ Now added after successful render
+
                   let spotData = spotDoc.data();
                   let listItem = document.createElement("li");
-                  // Edit here to change how favorites show up
                   listItem.classList.add("flex", "justify-between", "items-center");
 
                   const nameSpan = document.createElement("span");
                   nameSpan.textContent = spotData.name;
                   nameSpan.classList.add("cursor-pointer", "text-blue-600", "hover:underline");
 
-                  // New click handler for selecting the pin
                   nameSpan.addEventListener("click", () => {
-                    const marker = markerMap[favSpot.parkingSpotID];
+                    const marker = markerMap[spotID];
                     if (marker) {
-                      // Simulate clicking the marker
-                      selectedSpotID = favSpot.parkingSpotID;
+                      selectedSpotID = spotID;
                       marker.togglePopup();
                       map.flyTo({ center: marker.getLngLat() });
                       loadReviewsForSpot(selectedSpotID);
 
-                      // Update location display
                       const locationNameElement = document.getElementById("locationName");
                       if (locationNameElement) {
                         locationNameElement.textContent = spotData.name;
                         locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spotData.name)}`;
                       }
 
-                      // Show and configure Get Directions button
                       const directionsBtn = document.getElementById("getDirectionsBtn");
                       if (directionsBtn) {
                         const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${spotData.latitude},${spotData.longitude}`;
@@ -131,17 +131,14 @@ function loadFavorites() {
                         };
                       }
                     } else {
-                      alert("Marker not found on map. Please try again.");
+                      alert("Marker not found.");
                     }
                   });
 
-                  // Delete icon for removing a favorite
                   const deleteBtn = document.createElement("button");
                   deleteBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
                   deleteBtn.classList.add("ml-2");
-                  deleteBtn.onclick = function () {
-                    deleteFavorite(favSpot.parkingSpotID);
-                  };
+                  deleteBtn.onclick = () => deleteFavorite(spotID);
 
                   listItem.appendChild(nameSpan);
                   listItem.appendChild(deleteBtn);
@@ -153,6 +150,7 @@ function loadFavorites() {
     }
   });
 }
+
 
 
 // Delete user favorite, and remove from users Firestore
