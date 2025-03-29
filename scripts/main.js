@@ -61,7 +61,7 @@ function saveToFavorites(parkingSpotID) {
 // Take the selectedSpotID (when clicking a pin) and calls saveToFavorites(parkingSpotID) to store it
 function addFavorite() {
   console.log(
-    "🔍 Attempting to save favorite. Selected Spot ID:",
+    "Attempting to save favorite. Selected Spot ID:",
     selectedSpotID
   );
 
@@ -135,6 +135,7 @@ function loadFavorites() {
                     }
                   });
 
+                  // Delete icon for removing a favorite
                   const deleteBtn = document.createElement("button");
                   deleteBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
                   deleteBtn.classList.add("ml-2");
@@ -154,7 +155,7 @@ function loadFavorites() {
 }
 
 
-// Delete user favorites, and remove from users Firestore
+// Delete user favorite, and remove from users Firestore
 function deleteFavorite(parkingSpotID) {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -176,12 +177,11 @@ function deleteFavorite(parkingSpotID) {
   });
 }
 
-
 // Call function on page load
 loadFavorites();
 
-let selectedRating = 0;
 
+let selectedRating = 0;
 // Function to handle star clicks
 document.querySelectorAll(".star").forEach((star) => {
   star.addEventListener("click", function () {
