@@ -32,7 +32,7 @@ function loadParkingSpots() {
             locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodedName}`;
           }
 
-          // ✅ Show and configure the Get Directions button
+          // Show Get Directions button
           const directionsBtn = document.getElementById("getDirectionsBtn");
           if (directionsBtn) {
             const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`;
