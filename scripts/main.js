@@ -58,8 +58,7 @@ function saveToFavorites(parkingSpotID) {
   });
 }
 
-// Take the selectedSpotID (when clicking a pin)
-// Calls saveToFavorites(parkingSpotID) to store it
+// Take the selectedSpotID (when clicking a pin) and calls saveToFavorites(parkingSpotID) to store it
 function addFavorite() {
   console.log(
     "🔍 Attempting to save favorite. Selected Spot ID:",
@@ -153,6 +152,7 @@ function loadFavorites() {
     }
   });
 }
+
 
 // Delete user favorites, and remove from users Firestore
 function deleteFavorite(parkingSpotID) {
