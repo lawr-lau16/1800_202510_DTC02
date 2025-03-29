@@ -99,11 +99,78 @@ function loadFavorites() {
                   let spotData = spotDoc.data();
                   let listItem = document.createElement("li");
                   // Edit here to change how favorites show up
-                  listItem.innerText = `${spotData.name}`;
+                  listItem.classList.add("flex", "justify-between", "items-center");
+
+                  const nameSpan = document.createElement("span");
+                  nameSpan.textContent = spotData.name;
+                  nameSpan.classList.add("cursor-pointer", "text-blue-600", "hover:underline");
+
+                  // New click handler for selecting the pin
+                  nameSpan.addEventListener("click", () => {
+                    const marker = markerMap[favSpot.parkingSpotID];
+                    if (marker) {
+                      // Simulate clicking the marker
+                      selectedSpotID = favSpot.parkingSpotID;
+                      marker.togglePopup();
+                      map.flyTo({ center: marker.getLngLat() });
+                      loadReviewsForSpot(selectedSpotID);
+
+                      // Update location display
+                      const locationNameElement = document.getElementById("locationName");
+                      if (locationNameElement) {
+                        locationNameElement.textContent = spotData.name;
+                        locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spotData.name)}`;
+                      }
+
+                      // Show and configure Get Directions button
+                      const directionsBtn = document.getElementById("getDirectionsBtn");
+                      if (directionsBtn) {
+                        const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${spotData.latitude},${spotData.longitude}`;
+                        directionsBtn.classList.remove("hidden");
+                        directionsBtn.onclick = () => {
+                          window.open(directionsURL, "_blank");
+                        };
+                      }
+                    } else {
+                      alert("Marker not found on map. Please try again.");
+                    }
+                  });
+
+                  const deleteBtn = document.createElement("button");
+                  deleteBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
+                  deleteBtn.classList.add("ml-2");
+                  deleteBtn.onclick = function () {
+                    deleteFavorite(favSpot.parkingSpotID);
+                  };
+
+                  listItem.appendChild(nameSpan);
+                  listItem.appendChild(deleteBtn);
                   favoriteList.appendChild(listItem);
                 }
               });
           });
+        });
+    }
+  });
+}
+
+// Delete user favorites, and remove from users Firestore
+function deleteFavorite(parkingSpotID) {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      const userID = user.uid;
+      db.collection("users")
+        .doc(userID)
+        .collection("favorites")
+        .doc(parkingSpotID)
+        .delete()
+        .then(() => {
+          console.log("Favorite deleted successfully!");
+          alert("Favorite has been successfully removed.");
+        })
+        .catch((error) => {
+          console.error("Error removing favorite: ", error);
+          alert("Something went wrong while deleting. Please try again.");
         });
     }
   });
