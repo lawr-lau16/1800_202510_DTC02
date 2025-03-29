@@ -26,9 +26,12 @@
       href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
     />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    
+
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,8 +47,9 @@
                 document.getElementById("navbar").innerHTML = data;
                 getNameFromAuth(); // Update welcome message
               });
-              // Load footer with Logout button
-              fetch("text/footer_after_login.html")
+
+            // Load footer with Logout button
+            fetch("text/footer_after_login.html")
               .then((response) => response.text())
               .then((data) => {
                 document.getElementById("footer").innerHTML = data;
@@ -57,14 +61,14 @@
               .then((data) => {
                 document.getElementById("navbar").innerHTML = data;
               });
-          }
 
-          // Load footer with login button
-          fetch("text/footer_before_login.html")
-            .then((response) => response.text())
-            .then(
-              (data) => (document.getElementById("footer").innerHTML = data)
-            );
+            // Load footer with login button
+            fetch("text/footer_before_login.html")
+              .then((response) => response.text())
+              .then((data) => {
+                document.getElementById("footer").innerHTML = data;
+              });
+          }
         });
       }
 
@@ -138,7 +142,7 @@
           <!-- Get Directions Button -->
           <button
             id="getDirectionsBtn"
-            class="mt-4 w-full py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow-lg hover:bg-indigo-700 transition duration-300 hidden"
+            class="mt-4 w-full py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-800 transition duration-300 hidden"
           >
             Get Directions
           </button>
@@ -153,7 +157,7 @@
 
           <button
             onclick="addFavorite()"
-            class="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition duration-300"
+            class="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-800 transition duration-300"
           >
             Save to Favorites
           </button>
@@ -202,7 +206,7 @@
 
           <button
             onclick="submitReview()"
-            class="w-full py-2 rounded-lg bg-green-600 text-white font-semibold shadow-lg hover:bg-green-700 transition duration-300"
+            class="w-full py-2 rounded-lg bg-green-600 text-white font-semibold shadow-lg hover:bg-green-800 transition duration-300"
           >
             Submit Review
           </button>

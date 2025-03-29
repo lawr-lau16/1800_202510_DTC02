@@ -5,7 +5,7 @@
       class="flex items-center gap-3 tracking-widest leading-5 font-extrabold"
     >
       <!-- INSERT LOGO HERE -->
-      <a href="main.html"><img src="/Logo/logo1.png" class="w-12 h-12" /></a>
+      <a href="main.html"><img src="/Logo/logo1.png" class="w-12 h-12 hidden sm:block" /></a>
       <div class="h-[24px] flex items-center text-5xl">
         <a href="main.html">ParkPal</a>
       </div>
@@ -57,16 +57,19 @@
   </nav>
 
   <!-- Mobile Navigation -->
-  <div id="mobile-menu" class="hidden flex-col items-center gap-4 text-xl font-medium mt-4 lg:hidden">
-    <a href="../index.html" class="hover:text-gray-400 w-full text-center pb-2">Home</a>
-    <hr class="border-t border-gray-300 w-full my-1">
-  
-    <a href="../contact_us.html" class="hover:text-gray-400 w-full text-center py-2">Contact Us</a>
-    <hr class="border-t border-gray-300 w-full my-1">
-  
-    <a href="../user_information.html" class="hover:text-gray-400 w-full text-center py-2">Profile</a>
-    <hr class="border-t border-gray-300 w-full my-1">
-  
-    <a href="../index.html" class="hover:text-gray-400 text-xl w-full text-center pt-2">Log Out</a>
+  <div
+    id="mobile-menu"
+    class="flex-col hidden items-center gap-4 text-xl font-medium mt-4 lg:hidden"
+  >
+    <a href="../index.html" class="hover:text-gray-400">Home</a>
+    <a href="../contact_us.html" class="hover:text-gray-400">Contact Us</a>
+    <a href="../user_information.html" class="hover:text-gray-400">Profile</a>
+    <!-- User Name Display for Mobile -->
+    <a
+      href="../index.html"
+      class="hover:text-gray-400 text-xl"
+      onclick="logout()"
+      >Log Out</a
+    >
   </div>
 </header>
