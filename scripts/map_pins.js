@@ -47,9 +47,10 @@ function loadParkingSpots() {
         // Skip private spots not owned by the current user
         if (spot.visibility === "private" && spot.userID !== user.uid) return;
 
-        // Choose color
+        // Pick colors for map pins
         let markerColor = spot.visibility === "private" ? "purple" : "blue";
 
+        // Popup after creating new parking spot
         let marker = new mapboxgl.Marker({ color: markerColor })
           .setLngLat([spot.longitude, spot.latitude])
           .setPopup(new mapboxgl.Popup().setText(spot.name))
