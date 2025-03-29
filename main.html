@@ -26,9 +26,12 @@
       href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
     />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    
+
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,8 +47,9 @@
                 document.getElementById("navbar").innerHTML = data;
                 getNameFromAuth(); // Update welcome message
               });
-              // Load footer with Logout button
-              fetch("text/footer_after_login.html")
+
+            // Load footer with Logout button
+            fetch("text/footer_after_login.html")
               .then((response) => response.text())
               .then((data) => {
                 document.getElementById("footer").innerHTML = data;
@@ -57,14 +61,14 @@
               .then((data) => {
                 document.getElementById("navbar").innerHTML = data;
               });
-          }
 
-          // Load footer with login button
-          fetch("text/footer_before_login.html")
-            .then((response) => response.text())
-            .then(
-              (data) => (document.getElementById("footer").innerHTML = data)
-            );
+            // Load footer with login button
+            fetch("text/footer_before_login.html")
+              .then((response) => response.text())
+              .then((data) => {
+                document.getElementById("footer").innerHTML = data;
+              });
+          }
         });
       }
 

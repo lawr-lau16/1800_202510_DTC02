@@ -5,7 +5,7 @@
       class="flex items-center gap-3 tracking-widest leading-5 font-extrabold"
     >
       <!-- INSERT LOGO HERE -->
-      <a href="main.html"><img src="/Logo/logo1.png" class="w-12 h-12" /></a>
+      <a href="main.html"><img src="/Logo/logo1.png" class="w-12 h-12 hidden sm:block" /></a>
       <div class="h-[24px] flex items-center text-5xl">
         <a href="main.html">ParkPal</a>
       </div>
@@ -65,6 +65,11 @@
     <a href="../contact_us.html" class="hover:text-gray-400">Contact Us</a>
     <a href="../user_information.html" class="hover:text-gray-400">Profile</a>
     <!-- User Name Display for Mobile -->
-    <a href="../index.html" class="hover:text-gray-400 text-xl">Log Out</a>
+    <a
+      href="../index.html"
+      class="hover:text-gray-400 text-xl"
+      onclick="logout()"
+      >Log Out</a
+    >
   </div>
 </header>
