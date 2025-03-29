@@ -44,6 +44,7 @@ geocoder.on("result", ({ result }) => {
   loadReviews();
 });
 
+
 function submitReview() {
   const reviewText = document.getElementById("reviewInput").value.trim();
 
@@ -89,7 +90,8 @@ function submitReview() {
     });
 }
 
-// Function to load reviews for the selected pin
+
+// Load reviews for the selected pin
 function loadReviewsForSpot(spotID) {
   const reviewList = document.getElementById("reviewList");
   reviewList.innerHTML = ""; // Clear old reviews

@@ -1,12 +1,19 @@
+const markerMap = {}; // Global map of parkingSpotID to marker
+
+
 function loadParkingSpots() {
   db.collection("parking_spots").onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      let spot = doc.data(); // Get spot details from Firestore
+      // Get spot details from Firestore
+      let spot = doc.data();
       let marker = new mapboxgl.Marker()
         .setLngLat([spot.longitude, spot.latitude])
         .setPopup(new mapboxgl.Popup().setText(spot.name))
         .addTo(map);
 
+        markerMap[doc.id] = marker;
+
+        
       // Store Firestore document ID and name inside marker dataset
       marker.getElement().dataset.id = doc.id;
       marker.getElement().dataset.name = spot.name;
@@ -50,4 +57,5 @@ function loadParkingSpots() {
     }); // ✅ This closes querySnapshot.forEach
   });
 }
+
 loadParkingSpots()
