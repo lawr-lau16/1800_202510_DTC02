@@ -1,21 +1,20 @@
 function getNameFromAuth() {
+  // Check if a user is signed in
   firebase.auth().onAuthStateChanged((user) => {
-    // Check if a user is signed in:
+    // If user is logged in
     if (user) {
-      // Do something for the currently logged-in user here:
-      console.log(user.uid); // Print the uid in the browser console
-      console.log(user.displayName); // Print the user name in the browser console
-      const userName = user.displayName || user.email || "User"; // Fallback to email if displayName is not set
+      const userName = user.displayName || "User";
 
-      // Update desktop placeholder
+      // Update lg responsive placeholder
       const userNameElement = document.getElementById("name-goes-here");
       if (userNameElement) userNameElement.innerText = `${userName}!`;
 
-      // Update mobile placeholder
+      // Update sm responsive placeholder
       const userNameMobileElement = document.getElementById("name-goes-here-mobile");
       if (userNameMobileElement) userNameMobileElement.innerText = `${userName}!`;
+
+      // If no user is signed in.
     } else {
-      // No user is signed in.
       console.log("No user is logged in");
 
       // Update desktop placeholder
@@ -29,14 +28,16 @@ function getNameFromAuth() {
   });
 }
 
-getNameFromAuth(); // Run the function
+getNameFromAuth();
+
 
 // Check if user is logged in. Saves the parkingSpotID under the user's favorite collection.
 function saveToFavorites(parkingSpotID) {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      let userID = user.uid; // Get the logged-in user's ID
+      let userID = user.uid;
 
+      // Save the favorite under: users/{userID}/favorites/{parkingSpotID}
       db.collection("users")
         .doc(userID)
         .collection("favorites")
@@ -52,89 +53,109 @@ function saveToFavorites(parkingSpotID) {
         .catch((error) => {
           console.error("Error adding to favorites: ", error);
         });
+
+    // If user is not logged in
     } else {
       alert("You need to be logged in to save favorites.");
     }
   });
 }
 
+
 // Take the selectedSpotID (when clicking a pin) and calls saveToFavorites(parkingSpotID) to store it
 function addFavorite() {
-  console.log(
-    "Attempting to save favorite. Selected Spot ID:",
-    selectedSpotID
-  );
 
+  // If no parking spot has been selected
   if (!selectedSpotID) {
     alert("Select a parking spot first!");
     return;
   }
 
+  // Else, save selected parking spot to user's favorites
   saveToFavorites(selectedSpotID);
 }
 
-// Checks for changes in user's favorite collection
-// Updates favorites list if there are changes
+
+// Loads and displays the logged-in user's list of favorite parking spots, and updates favorites list if there are changes
 function loadFavorites() {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       let userID = user.uid;
+
+      // Save list of favorite spots
       let favoriteList = document.getElementById("favoriteList");
+
+      // Prevent duplicates
       let renderedFavorites = new Set();
 
+      // Check for updates to user's favorites
       db.collection("users")
         .doc(userID)
         .collection("favorites")
         .onSnapshot((snapshot) => {
-          favoriteList.innerHTML = ""; // Clear current list
-          renderedFavorites.clear();   // Clear previous render tracking
+          // Clear previous favorites list before updating with new list
+          favoriteList.innerHTML = "";
+          renderedFavorites.clear();
 
+          // Loop through each favorite spot
           snapshot.forEach((doc) => {
             let favSpot = doc.data();
             let spotID = favSpot.parkingSpotID;
 
+            // Retrieve parking spot data
             db.collection("parking_spots")
               .doc(spotID)
               .get()
               .then((spotDoc) => {
                 if (spotDoc.exists && !renderedFavorites.has(spotID)) {
-                  renderedFavorites.add(spotID); // ✅ Now added after successful render
+                  renderedFavorites.add(spotID);
 
                   let spotData = spotDoc.data();
+                  // Create <li> element for favorite
                   let listItem = document.createElement("li");
                   listItem.classList.add("flex", "justify-between", "items-center");
 
+                  // Make parking spot name clickable
                   const nameSpan = document.createElement("span");
                   nameSpan.textContent = spotData.name;
                   nameSpan.classList.add("cursor-pointer", "text-blue-600", "hover:underline");
 
+                  // When user clicks the spot name...
                   nameSpan.addEventListener("click", () => {
                     const marker = markerMap[spotID];
                     if (marker) {
+                      // selectedSpotID as the active spot
                       selectedSpotID = spotID;
                       marker.togglePopup();
+                      // Popup and reposition map to pin
                       map.flyTo({ center: marker.getLngLat() });
+                      // Reload reviews for this pin
                       loadReviewsForSpot(selectedSpotID);
 
+                      // Update location name
                       const locationNameElement = document.getElementById("locationName");
                       if (locationNameElement) {
                         locationNameElement.textContent = spotData.name;
                         locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spotData.name)}`;
                       }
 
+                      // Add 'Get Directions' Button
                       const directionsBtn = document.getElementById("getDirectionsBtn");
                       if (directionsBtn) {
+                        // Add lat and long to google maps link
                         const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${spotData.latitude},${spotData.longitude}`;
                         directionsBtn.classList.remove("hidden");
                         directionsBtn.onclick = () => {
                           window.open(directionsURL, "_blank");
                         };
                       }
+                      // Error if no marker is clicked
                     } else {
                       alert("Marker not found.");
                     }
                   });
 
+                  // Create x button to delete favorited parking spots
                   const deleteBtn = document.createElement("button");
                   deleteBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
                   deleteBtn.classList.add("ml-2");
@@ -152,12 +173,13 @@ function loadFavorites() {
 }
 
 
-
 // Delete user favorite, and remove from users Firestore
 function deleteFavorite(parkingSpotID) {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       const userID = user.uid;
+
+      // Delete selected favorite from Firestore
       db.collection("users")
         .doc(userID)
         .collection("favorites")
@@ -180,10 +202,12 @@ loadFavorites();
 
 
 let selectedRating = 0;
-// Function to handle star clicks
+// Function to handle star clicks. eventListener to each star
 document.querySelectorAll(".star").forEach((star) => {
   star.addEventListener("click", function () {
-    selectedRating = parseInt(this.getAttribute("data-value")); // Get star value
+    // Get star value
+    selectedRating = parseInt(this.getAttribute("data-value"));
+    // Update star colors
     updateStarColors();
   });
 });
@@ -192,6 +216,7 @@ document.querySelectorAll(".star").forEach((star) => {
 function updateStarColors() {
   document.querySelectorAll(".star").forEach((star) => {
     let value = parseInt(star.getAttribute("data-value"));
-    star.style.color = value <= selectedRating ? "#facc15" : "#9ca3af"; // Yellow if selected, gray otherwise
+    // Yellow if selected, gray otherwise
+    star.style.color = value <= selectedRating ? "#facc15" : "#9ca3af"; 
   });
 }
