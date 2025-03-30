@@ -7,11 +7,11 @@ function getNameFromAuth() {
 
       // Update lg responsive placeholder
       const userNameElement = document.getElementById("name-goes-here");
-      if (userNameElement) userNameElement.innerText = `${userName}!`;
+      if (userNameElement) userNameElement.innerText = `${userName}`;
 
       // Update sm responsive placeholder
       const userNameMobileElement = document.getElementById("name-goes-here-mobile");
-      if (userNameMobileElement) userNameMobileElement.innerText = `${userName}!`;
+      if (userNameMobileElement) userNameMobileElement.innerText = `${userName}`;
 
       // If no user is signed in.
     } else {

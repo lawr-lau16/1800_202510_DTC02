@@ -35,7 +35,6 @@ function createSpot() {
     });
 }
 
-
 function loadParkingSpots() {
   firebase.auth().onAuthStateChanged((user) => {
     if (!user) return;
@@ -48,7 +47,7 @@ function loadParkingSpots() {
         if (spot.visibility === "private" && spot.userID !== user.uid) return;
 
         // Pick colors for map pins
-        let markerColor = spot.visibility === "private" ? "purple" : "blue";
+        let markerColor = spot.visibility === "private" ? "#3270C3" : "#0C2F70";
 
         // Popup after creating new parking spot
         let marker = new mapboxgl.Marker({ color: markerColor })
@@ -69,14 +68,17 @@ function loadParkingSpots() {
             const locationNameElement = document.getElementById("locationName");
             if (locationNameElement) {
               locationNameElement.textContent = selectedSpotName;
-              locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedSpotName)}`;
+              locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                selectedSpotName
+              )}`;
             }
 
             const directionsBtn = document.getElementById("getDirectionsBtn");
             if (directionsBtn) {
               const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`;
               directionsBtn.classList.remove("hidden");
-              directionsBtn.onclick = () => window.open(directionsURL, "_blank");
+              directionsBtn.onclick = () =>
+                window.open(directionsURL, "_blank");
             }
 
             loadReviewsForSpot(selectedSpotID);
@@ -87,6 +89,4 @@ function loadParkingSpots() {
   });
 }
 
-
-
-loadParkingSpots()
+loadParkingSpots();
