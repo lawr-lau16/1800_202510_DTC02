@@ -4,12 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Map with Reviews & Favorites</title>
+  <title>ParkPal</title>
 
   <!-- Mapbox Styles -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.css" rel="stylesheet" />
-  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.1.0/mapbox-gl-geocoder.css"
-    rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.1.0/mapbox-gl-geocoder.css" rel="stylesheet" />
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -125,7 +124,7 @@
           Favorited Parking Spots:
         </h3>
         <ul id="favoriteList" class="space-y-2 text-gray-900 mb-4"></ul>
-
+        <!-- eventListener to add selected to favorites Firestore -->
         <button onclick="addFavorite()"
           class="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-800 transition duration-300">
           Save to Favorites
@@ -160,8 +159,6 @@
 
   <div id="footer" class=""></div>
 
-  <!-- External JavaScript -->
-   
   <!-- MapBox -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
   <script
