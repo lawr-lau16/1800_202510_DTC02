@@ -6,7 +6,7 @@ function createSpot() {
   //Name of the parking spot from the input field
   const name = document.getElementById("spotName").value.trim();
 
-  // Alert if name or searchLocation is empty
+  // Alert if name or searchLocation is missing
   if (!name || !searchLocation) {
     alert("Please enter a spot name and select a location.");
     return;

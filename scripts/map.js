@@ -1,8 +1,8 @@
-// Mapbox token
+//  Set the access token for Mapbox (required for map to work)
 mapboxgl.accessToken =
   "pk.eyJ1IjoiZ3VycHJlZXRzaW5naDk0MTQiLCJhIjoiY204NjlnNmdsMDF4cjJpcHFrdWczYXRyYSJ9.aQSt4ydGc7sjLgC4VodRdg";
 
-// Display mapbox within map container
+// Initialize the map inside the container with ID "map"
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/streets-v11",
@@ -18,7 +18,7 @@ let selectedSpotID = null;
 // Mapbox zoom controls
 map.addControl(new mapboxgl.NavigationControl(), "top-left");
 
-// Add search bar
+// Add a Mapbox search bar (geocoder)
 const geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
   mapboxgl: mapboxgl,
