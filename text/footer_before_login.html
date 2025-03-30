@@ -1,24 +1,53 @@
+<!-- 
+  MOBILE NAVIGATION FOOTER COMPONENT
+  - Fixed position at bottom of viewport on mobile devices
+  - Hidden on screens larger than small breakpoint (sm:hidden)
+  - Dark background with white text and top border
+-->
 <div
     class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white flex justify-around items-center p-2 sm:hidden border-t border-gray-600">
-    <!-- Home -->
+<!-- 
+      HOME NAVIGATION LINK
+      - Links to index.html (home page)
+      - Flex column layout with centered icon and text
+      - Hover effect with lighter gray background
+    -->
     <a href="index.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
+        <!-- Home icon from Font Awesome -->
         <i class="fas fa-home text-xl"></i>
+        <!-- Link label text -->
         <span class="text-xs mt-1">Home</span>
     </a>
 
-    <!-- About Us -->
+<!-- 
+      ABOUT US NAVIGATION LINK 
+      - Same styling as home link
+      - Links to aboutus.html
+      - Uses info circle icon
+    -->
     <a href="aboutus.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
         <i class="fas fa-info-circle text-xl"></i>
         <span class="text-xs mt-1">About Us</span>
     </a>
 
-    <!-- Contact -->
+    <!-- 
+          CONTACT US NAVIGATION LINK
+          - Links to contact_us.html
+          - Uses envelope icon
+          - Consistent styling with other links
+        -->
     <a href="contact_us.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
         <i class="fas fa-envelope text-xl"></i>
         <span class="text-xs mt-1">Contact Us</span>
     </a>
 
-    <!-- Log In (for non-authenticated users) -->
+    <!-- 
+          LOGIN NAVIGATION LINK
+          - For non-authenticated users
+          - Links to login.html
+          - Uses sign-in icon
+          - Same hover and transition effects
+        -->
     <a href="login.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
         <i class="fas fa-sign-in-alt text-xl"></i>
         <span class="text-xs mt-1">Log In</span> 
