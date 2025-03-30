@@ -1,40 +1,53 @@
+<!-- Mobile Navigation Footer -->
+<!-- Fixed positioned at the bottom of the screen on mobile devices -->
+<!-- Dark background with white text and top border -->
 <div
   class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white flex justify-around items-center p-2 sm:hidden border-t border-gray-600"
 >
-  <!-- Home -->
+  <!-- Home Navigation Button -->
+  <!-- Flex container with column direction for icon + text layout -->
+  <!-- Hover effect with gray background and smooth transition -->
   <a
     href="main.html"
     class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition"
   >
+  <!-- Home icon from Font Awesome -->
     <i class="fas fa-home text-xl"></i>
+    <!-- Label text below icon -->
     <span class="text-xs mt-1">Home</span>
   </a>
 
-  <!-- About Us -->
+  <!-- About Us Navigation Button -->
+  <!-- Same structure as Home button -->
   <a
     href="aboutus.html"
     class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition"
   >
+  <!-- Info circle icon -->
     <i class="fas fa-info-circle text-xl"></i>
     <span class="text-xs mt-1">About Us</span>
   </a>
 
-  <!-- Contact -->
+  <!-- Contact Us Navigation Button -->
+  <!-- Same structure as other buttons -->
   <a
     href="contact_us.html"
     class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition"
   >
+  <!-- Envelope icon -->
     <i class="fas fa-envelope text-xl"></i>
     <span class="text-xs mt-1">Contact Us</span>
   </a>
 
-  <!-- Logout -->
+<!-- Logout Button -->
+<!-- Same structure as other navigation items -->
  <a
   role="button"
   tabindex="0"
   onclick="logout()"
   class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition cursor-pointer"
 >
+<!-- Sign out icon -->
   <i class="fas fa-sign-out-alt text-xl"></i>
   <span class="text-xs mt-1">Log Out</span>
 </a>
