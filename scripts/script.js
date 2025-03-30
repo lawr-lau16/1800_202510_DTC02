@@ -1,3 +1,4 @@
+// JavaScript for log out button
 function logout() {
   firebase
     .auth()
