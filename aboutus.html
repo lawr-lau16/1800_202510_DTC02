@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
+  <!-- Basic page setup -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - ParkPal</title>
-  <!------------------------------------------>
-  <!-- Bootstrap Library CSS JS CDN go here -->
-  <!------------------------------------------>
+
+
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -16,9 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <!-------------------------------------------------------->
-  <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
-  <!-------------------------------------------------------->
+  <!-- Firebase for database and login -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -27,14 +26,10 @@
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-<!-------------------------------------------->
-<!-- Icon Libraries -->
-<!-------------------------------------------->
+<!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
-  <!-------------------------------------------->
-  <!-- Other libraries and styles of your own -->
-  <!-------------------------------------------->
+<!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- JavaScript to load NAVBAR and FOOTER -->
@@ -79,16 +74,16 @@
 </head>
 
 <body class="flex flex-col min-h-screen bg-gray-100">
-  <!-- NAVBAR -->
+<!-- Top menu  -->
   <div id="navbar"></div>
 
-  <!-- ABOUT US CONTENT -->
+<!-- Main content -->
   <main class="flex-grow">
     <div class="container mx-auto px-4 py-12">
       <!-- Page Title -->
       <h1 class="text-5xl font-bold text-center text-gray-800 mb-8">About Us</h1>
 
-      <!-- Mission Section -->
+    <!-- What we do section -->
       <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
         <h2 class="text-3xl font-semibold text-gray-800 mb-4">Our Mission</h2>
         <p class="text-lg text-gray-600 mb-4">
@@ -102,7 +97,7 @@
         </p>
       </div>
 
-      <!-- Team Section -->
+      <!-- Team members Section -->
       <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">Meet Our Team</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -129,7 +124,7 @@
         </div>
       </div>
 
-      <!-- Values Section -->
+      <!-- What's important to us -->
       <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">Our Values</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -171,8 +166,7 @@
         </div>
       </div>
 
-      <!-- Pitch Video Section -->
-      <!-- Pitch Video Section -->
+      <!-- Our Pitch Video Section -->
       <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">Our Pitch Video</h2>
         <div class="flex justify-center">
@@ -185,12 +179,10 @@
       </div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- Bottom menu (footer) -->
   <div id="footer"></div>
 
-  <!---------------------------------------------->
-  <!-- Your own JavaScript functions go here    -->
-  <!---------------------------------------------->
+  <!-- extra scripts -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -201,7 +193,7 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-  <!-- External JS Files -->
+  <!-- Our custom scripts -->
   <script src="./scripts/firebaseAPI_DTC02.js"></script>
   <script src="./scripts/map_pins.js"></script>
   <script src="./scripts/main.js"></script>
