@@ -44,6 +44,7 @@ geocoder.on("result", ({ result }) => {
   loadReviews();
 });
 
+
 function submitReview() {
   const reviewText = document.getElementById("reviewInput").value.trim();
 
@@ -89,36 +90,81 @@ function submitReview() {
     });
 }
 
-// Function to load reviews for the selected pin
+
+// Load reviews for the selected pin
 function loadReviewsForSpot(spotID) {
   const reviewList = document.getElementById("reviewList");
   reviewList.innerHTML = ""; // Clear old reviews
 
-  db.collection("reviews")
-    .where("spotID", "==", spotID)
-    .orderBy("timestamp", "desc")
-    .get()
-    .then((querySnapshot) => {
-      if (querySnapshot.empty) {
-        reviewList.innerHTML =
-          "<p class='text-gray-600 italic'>No reviews yet for this spot.</p>";
-        return;
-      }
+  // Check if the user is logged in
+  firebase.auth().onAuthStateChanged((user) => {
+    const currentUserID = user ? user.uid : null;
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const stars = "⭐".repeat(data.rating) + "✩".repeat(5 - data.rating);
-        const reviewEntry = document.createElement("div");
-        reviewEntry.className = "p-3 bg-gray-200 rounded-lg shadow";
+    db.collection("reviews")
+      .where("spotID", "==", spotID)
+      .orderBy("timestamp", "desc")
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.empty) {
+          reviewList.innerHTML =
+            "<p class='text-gray-600 italic'>No reviews yet for this spot.</p>";
+          return;
+        }
 
-        reviewEntry.innerHTML = `
-          <p class="font-semibold text-lg">${stars}</p>
-          <p>${data.text}</p>
-        `;
-        reviewList.appendChild(reviewEntry);
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const stars = "⭐".repeat(data.rating) + "✩".repeat(5 - data.rating);
+          const reviewEntry = document.createElement("div");
+          reviewEntry.className = "p-3 bg-gray-200 rounded-lg shadow space-y-2";
+          // Top row with stars and (maybe) delete button
+          const topRow = document.createElement("div");
+          topRow.className = "flex justify-between items-center";
+
+          const starElem = document.createElement("p");
+          starElem.className = "font-semibold text-lg";
+          starElem.textContent = stars;
+
+          topRow.appendChild(starElem);
+
+          // 🔥 Add delete icon if this is the user's review
+          if (data.userID === currentUserID) {
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML =
+              '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
+            deleteBtn.classList.add("ml-2");
+            deleteBtn.onclick = () => {
+              deleteReview(doc.id);
+            };
+            topRow.appendChild(deleteBtn);
+          }
+
+          reviewEntry.appendChild(topRow);
+
+          // Review text
+          const textElem = document.createElement("p");
+          textElem.textContent = data.text;
+          reviewEntry.appendChild(textElem);
+
+          reviewList.appendChild(reviewEntry);
+        });
+      })
+      .catch((error) => {
+        console.error("Error loading reviews:", error);
       });
+  });
+}
+
+
+function deleteReview(reviewID) {
+  db.collection("reviews")
+    .doc(reviewID)
+    .delete()
+    .then(() => {
+      alert("Review deleted.");
+      loadReviewsForSpot(selectedSpotID); // Refresh reviews
     })
     .catch((error) => {
-      console.error("Error loading reviews:", error);
+      console.error("Error deleting review:", error);
+      alert("Something went wrong while deleting the review.");
     });
 }

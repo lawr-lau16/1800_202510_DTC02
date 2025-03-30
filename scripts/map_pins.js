@@ -1,53 +1,92 @@
+const markerMap = {}; // Global map of parkingSpotID to marker
+
+function createSpot() {
+  const name = document.getElementById("spotName").value.trim();
+
+  if (!name || !searchLocation) {
+    alert("Please enter a spot name and select a location.");
+    return;
+  }
+
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    alert("You must be logged in to create a parking spot.");
+    return;
+  }
+
+  const lat = searchLocation[1];
+  const lng = searchLocation[0];
+
+  db.collection("parking_spots")
+    .add({
+      name: name,
+      latitude: lat,
+      longitude: lng,
+      userID: user.uid,
+      visibility: "private",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .then(() => {
+      alert("Private parking spot saved!");
+    })
+    .catch((error) => {
+      console.error("Error saving spot:", error);
+      alert("Something went wrong.");
+    });
+}
+
+
 function loadParkingSpots() {
-  db.collection("parking_spots").onSnapshot((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      let spot = doc.data(); // Get spot details from Firestore
-      let marker = new mapboxgl.Marker()
-        .setLngLat([spot.longitude, spot.latitude])
-        .setPopup(new mapboxgl.Popup().setText(spot.name))
-        .addTo(map);
+  firebase.auth().onAuthStateChanged((user) => {
+    if (!user) return;
 
-      // Store Firestore document ID and name inside marker dataset
-      marker.getElement().dataset.id = doc.id;
-      marker.getElement().dataset.name = spot.name;
+    db.collection("parking_spots").onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        let spot = doc.data();
 
-      // Handle marker click event
-      marker.getElement().addEventListener("click", function () {
-        selectedSpotID = this.dataset.id;
-        let selectedSpotName = this.dataset.name;
+        // Skip private spots not owned by the current user
+        if (spot.visibility === "private" && spot.userID !== user.uid) return;
 
-        // Wait just a moment to ensure DOM is loaded
-        setTimeout(() => {
-          const locationNameElement = document.getElementById("locationName");
-          if (locationNameElement) {
-            locationNameElement.textContent = selectedSpotName + "";
-            const encodedName = encodeURIComponent(selectedSpotName);
-            locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodedName}`;
-          }
+        // Pick colors for map pins
+        let markerColor = spot.visibility === "private" ? "purple" : "blue";
 
-          // ✅ Show and configure the Get Directions button
-          const directionsBtn = document.getElementById("getDirectionsBtn");
-          if (directionsBtn) {
-            const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`;
-            directionsBtn.classList.remove("hidden");
-            directionsBtn.onclick = () => {
-              window.open(directionsURL, "_blank");
-            };
-          }
+        // Popup after creating new parking spot
+        let marker = new mapboxgl.Marker({ color: markerColor })
+          .setLngLat([spot.longitude, spot.latitude])
+          .setPopup(new mapboxgl.Popup().setText(spot.name))
+          .addTo(map);
 
-          const reviewList = document.getElementById("reviewList");
-          if (!reviewList) {
-            console.error(
-              "❌ 'reviewList' element not found. Check your main.html."
-            );
-            return;
-          }
+        markerMap[doc.id] = marker;
 
-          console.log("✅ Selected Spot ID Set:", selectedSpotID);
-          loadReviewsForSpot(selectedSpotID);
-        }, 100);
+        marker.getElement().dataset.id = doc.id;
+        marker.getElement().dataset.name = spot.name;
+
+        marker.getElement().addEventListener("click", function () {
+          selectedSpotID = this.dataset.id;
+          let selectedSpotName = this.dataset.name;
+
+          setTimeout(() => {
+            const locationNameElement = document.getElementById("locationName");
+            if (locationNameElement) {
+              locationNameElement.textContent = selectedSpotName;
+              locationNameElement.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedSpotName)}`;
+            }
+
+            const directionsBtn = document.getElementById("getDirectionsBtn");
+            if (directionsBtn) {
+              const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`;
+              directionsBtn.classList.remove("hidden");
+              directionsBtn.onclick = () => window.open(directionsURL, "_blank");
+            }
+
+            loadReviewsForSpot(selectedSpotID);
+          }, 100);
+        });
       });
-    }); // ✅ This closes querySnapshot.forEach
+    });
   });
 }
+
+
+
 loadParkingSpots()

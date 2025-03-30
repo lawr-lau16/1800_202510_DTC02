@@ -1,26 +1,42 @@
 <div
-  class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white flex justify-around items-center p-2 sm:hidden border-t border-gray-600">
+  class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white flex justify-around items-center p-2 sm:hidden border-t border-gray-600"
+>
   <!-- Home -->
-  <a href="main.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
+  <a
+    href="main.html"
+    class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition"
+  >
     <i class="fas fa-home text-xl"></i>
     <span class="text-xs mt-1">Home</span>
   </a>
 
   <!-- About Us -->
-  <a href="aboutus.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
+  <a
+    href="aboutus.html"
+    class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition"
+  >
     <i class="fas fa-info-circle text-xl"></i>
     <span class="text-xs mt-1">About Us</span>
   </a>
 
   <!-- Contact -->
-  <a href="contact_us.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
+  <a
+    href="contact_us.html"
+    class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition"
+  >
     <i class="fas fa-envelope text-xl"></i>
     <span class="text-xs mt-1">Contact Us</span>
   </a>
 
   <!-- Logout -->
-  <a href="index.html" class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition">
-    <i class="fas fa-sign-out-alt text-xl"></i>
-    <span class="text-xs mt-1">Logout</span>
-  </a>
+ <a
+  role="button"
+  tabindex="0"
+  onclick="logout()"
+  class="flex flex-col items-center px-3 py-2 hover:bg-gray-700 rounded-lg transition cursor-pointer"
+>
+  <i class="fas fa-sign-out-alt text-xl"></i>
+  <span class="text-xs mt-1">Log Out</span>
+</a>
+
 </div>
